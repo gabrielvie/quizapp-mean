@@ -1,0 +1,52 @@
+<div class="page-header">
+    <h2>Adicionar as Questões
+        <br>
+        <small>Adicione aqui a questão e suas alternativas e selecione a correta.</small>
+    </h2>
+</div>
+<form name="quizAdd" ng-submit="questionCtrl.add(quizAdd.$valid)" novalidate>
+    <div class="form-group">
+        <select class="form-control" id="tema" ng-model="questionCtrl.questao._tema" required>
+            <option value="{{ temas._id }}" ng-repeat="temas in mainCtrl.temas">{{ temas.titulo }}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <textarea rows="7" type="text" class="form-control" name="titulo" ng-model="questionCtrl.questao.titulo" required placeholder="Questão"></textarea>
+    </div>
+    <br/>
+    <h4>Adicione as alternativas <small>Não se esqueça de escolher a alternativa correta</small></h4>
+    <div class="form-group" ng-repeat="alternativa in questionCtrl.questao.alternativas">
+        <div class="input-group">
+            <div class="input-group-addon">
+                <input type="radio" ng-model="questionCtrl.questao.correta" required value="{{ $index }}">
+            </div>
+            <input type="text" class="form-control" ng-model="alternativa.titulo" required placeholder="Alternativa {{ $index + 1 }}">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success" ng-disabled="quizAdd.$invalid">Salvar</button>
+</form>
+
+<br>
+<br>
+
+<table class="table table-striped table-bordered auto">
+    <caption>Questões.</caption>
+    <thead>
+        <tr>
+            <th class="col-sm-1">#</th>
+            <th>Questão</th>
+            <th class="col-sm-1">Excluir</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="question in questionCtrl.questoes">
+            <td scope="row">#{{ question._id | limitTo: 7 }}</td>
+            <td scope="row">{{ question.titulo }}</td>
+            <td scope="row" class="text-center">
+                <button type="button" class="btn btn-danger btn-sm" ng-click="questionCtrl.delete(question._id)">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
