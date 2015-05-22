@@ -13,7 +13,10 @@
         };
 
         questionsFactory.all = function(tema_id) {
-            return $http.get('/api/questoes/' + tema_id);
+            if (typeof tema_id === undefined)
+                return $http.get('/api/questoes/');
+            else
+                return $http.get('/api/questoes/' + tema_id);
         };
 
         questionsFactory.delete = function(id) {

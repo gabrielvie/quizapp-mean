@@ -10,18 +10,18 @@
         .config(['$routeProvider', function($routeProvider) {
             $routeProvider.when('/',{
                 templateUrl: 'app/views/home.html',
-                controller: 'QuestionController',
-                controllerAs: 'questionCtrl'
+                controller: 'RankingController',
+                controllerAs: 'rankingCtrl'
             });
 
-            $routeProvider.when('/:tema_id',{
-                templateUrl: 'app/views/home.html',
+            $routeProvider.when('/questoes/tema/:tema_id',{
+                templateUrl: 'app/views/questoes/questoes.html',
                 controller: 'QuestionController',
                 controllerAs: 'questionCtrl'
             });
             
-            $routeProvider.when('/add/questao',{
-                templateUrl: 'app/views/questaoAdd.html',
+            $routeProvider.when('/questoes/add',{
+                templateUrl: 'app/views/questoes/add.html',
                 controller: 'QuestionController',
                 controllerAs: 'questionCtrl'
             });

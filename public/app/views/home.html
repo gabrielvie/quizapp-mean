@@ -1,23 +1,5 @@
 <h1 class="page-header">
-        Questionário
-        <br/>
-        <small>Secondary Text</small>
-    </h1>
-
-    <!-- First Blog Post -->
-    <div ng-repeat="question in questionCtrl.questoes">
-        <p><span class="glyphicon glyphicon-time"></span> {{ question.since }}</p>
-        <p class="lead">
-            <a href="index.php">{{ question.titulo }}</a>
-        </p>
-        <hr>
-        <div class="radio" ng-repeat="alternative in question.alternativas">
-            <label class="radio-inline">
-                <input type="radio" name="answered" ng-model="question.answer" required value="{{ alternative._id }}">
-                {{ alternative.titulo }}
-            </label>
-        </div>
-
-        <hr>
-    </div>
-    <a class="btn btn-primary" href="#">Enviar <span class="glyphicon glyphicon-chevron-right"></span></a>
+    Ranking
+    <br/>
+    <small>Confira abaixo os 10 ultimos colocados</small>
+</h1>

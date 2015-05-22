@@ -7,15 +7,24 @@ var bodyParser = require('body-parser'),
 module.exports = function (app, express) {
     var apiRouter = express.Router();
 
-    apiRouter.route('/questoes')
+    apiRouter.route('/questoes/:tema_id')
         .get(function (req, res) {
-            Questao.find(function(err, questoes){
-                if (err) return res.send(err);
+            if (typeof req.params.tema_id === undefined) {
+                Questao.find(function(err, questoes){
+                    if (err) return res.send(err);
 
-                res.json(questoes);
+                    res.json(questoes);
+                });
+            } else {
+                Questao.find({ _tema: req.params.tema_id },function(err, questoes){
+                    if (err) return res.send(err);
 
-            })
-        })
+                    res.json(questoes);
+                });
+            }
+        });
+
+    apiRouter.route('/questoes')
         .post(function (req, res) {
             Tema.findById(req.body._tema, function (err, tema) {
                 if (err) return res.send(err);
@@ -41,16 +50,6 @@ module.exports = function (app, express) {
 
             });
         });
-
-    apiRouter.route('/questoes/:tema_id')
-        .get(function (req, res) {
-            Questao.find({ _tema: req.params.tema_id },function(err, questoes){
-                if (err) return res.send(err);
-
-                res.json(questoes);
-
-            })
-        })
 
     apiRouter.route('/questoes/:questao_id')
         .delete(function (req, res) {

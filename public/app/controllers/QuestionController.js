@@ -11,20 +11,13 @@
 
         vm.questoes = [];
 
+
         vm.get = function () {
-            if (typeof $routeParams.tema_id === undefined) {
-                questionsService.all()
-                    .success(function (data) {
-                        vm.questoes = data;
-                        console.log(data);
-                    });
-            } else {
-                questionsService.all($routeParams.tema_id)
-                    .success(function (data) {
-                        vm.questoes = data;
-                        console.log(data);
-                    });
-            }
+            questionsService.all($routeParams.tema_id)
+                .success(function (data) {
+                    vm.questoes = data;
+                    console.log(data);
+                });
         };
 
         vm.delete = function (question_id) {
@@ -50,11 +43,11 @@
             vm.questao = {};
             vm.questao.alternativas = [
                 {correta: false},{correta: false},
-                {correta: false},{correta: false},
-                {correta: false}
+                {correta: false},{correta: false}
             ];
         };
 
+        vm.reset();
         vm.get();
 
     };
